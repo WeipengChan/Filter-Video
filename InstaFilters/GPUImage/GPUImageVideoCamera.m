@@ -38,7 +38,7 @@
     if ([GPUImageVideoCamera supportsFastTextureUpload])
     {
         [GPUImageOpenGLESContext useImageProcessingContext];
-        CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, (__bridge void *)[[GPUImageOpenGLESContext sharedImageProcessingOpenGLESContext] context], NULL, &coreVideoTextureCache);
+        CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, (__bridge CVEAGLContext)((__bridge void *)[[GPUImageOpenGLESContext sharedImageProcessingOpenGLESContext] context]), NULL, &coreVideoTextureCache);
         if (err) 
         {
             NSAssert(NO, @"Error at CVOpenGLESTextureCacheCreate %d");
@@ -190,9 +190,10 @@
         
         CVPixelBufferUnlockBaseAddress(cameraFrame, 0);
 
+        //新滤镜成为默认的纹理
         glBindTexture(outputTexture, 0);
         
-        // Flush the CVOpenGLESTexture cache and release the texture
+        // Flush the CVOpenGLESTexture cache and release the texture，纹理
         CVOpenGLESTextureCacheFlush(coreVideoTextureCache, 0);
         CFRelease(texture);
         outputTexture = 0;
