@@ -1,0 +1,16 @@
+//
+//  IFFiltersViewController.h
+//  InstaFilters
+//
+//  Created by Di Wu on 2/28/12.
+//  Copyright (c) 2012 twitter:@diwup. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface IFFiltersViewController : UIViewController
+
+@property (nonatomic, unsafe_unretained) BOOL shouldLaunchAsAVideoRecorder;
+@property (nonatomic, unsafe_unretained) BOOL shouldLaunchAshighQualityVideo;
+
+@end
